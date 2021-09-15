@@ -1,0 +1,27 @@
+{% extends "home/layout.html" %}
+{% load static %}
+
+{% block styles %}
+{% endblock %}
+
+{% block title %}
+    Memory archive
+{% endblock %}
+
+{% block body %}
+    <!-- <h1 class="cover-heading">Online Book Station</h1> -->
+    <div class="container" style="text-align: center;">
+        <p class="lead motto">
+            Your list of memories is empty.
+        </p>
+        <p class="lead">
+            <a class="btn btn-lg btn-secondary" href="{% url 'memory:memory_create' %}" >Add your memory place</a>
+        </p>
+        {% if user.is_authenticated %}
+        <h1>AUTHENTICATED!</h1>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
