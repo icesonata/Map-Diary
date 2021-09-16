@@ -2,14 +2,66 @@
 {% load static %}
 
 {% block styles %}
+{{ form.media }}
+<link rel="stylesheet" href="{% static 'home/styles/home.css' %}">
 {% endblock %}
 
 {% block title %}
-    Memory create
+Memory create
 {% endblock %}
 
 {% block body %}
-    <h1>Hello world</h1>
+<div class="card-body">
+    <form class="" autocomplete="off" method="post">
+        {% csrf_token %}
+        <!-- <div id="map" class="form-group mb-4 d-flex justify-content-center">
+                {{form.location|safe}}
+            </div>
+                <div class="form-group">
+                    <label >Name</label>
+                    <input type="text" class="form-control" name="name" maxlength="128" required>
+                </div>
+                <div class="form-group">
+                    <label >Comment</label>
+                    <textarea class="form-control" name="comment" rows="5" maxlength="512" required></textarea>
+                </div>
+            <span class="">
+                <button type="submit" class="btn btn-warning rounded-pill w-100 d-block mx-auto" >Create</button>
+            </span> -->
+        <div class="row">
+            <div class="col-sm-7">
+                <!-- <div class="card"> -->
+                <!-- <div class="card-body"> -->
+                <div class="container-fluid">
+                    <div class="d-grid col-lg-6 float-left">
+                        {{form.location|safe}}
+                    </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="card">
+                    <div class="card-body text-muted">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name" maxlength="128" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" name="comment" rows="10" maxlength="512" required></textarea>
+                        </div>
+                        <span class="">
+                            <button type="submit"
+                                class="btn btn-warning rounded-pill w-100 d-block mx-auto">Create</button>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}
 
 {% block scripts %}

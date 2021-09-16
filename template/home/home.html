@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{% static 'home/styles/home.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -10,22 +11,39 @@
 
 {% block body %}
     <!-- <h1 class="cover-heading">Online Book Station</h1> -->
-    <div class="container" style="text-align: center;">
+    <!-- <div class="container" style="text-align: center;">
         <p class="lead motto">
             Your list of memories is empty.
         </p>
         <p class="lead">
             <a class="btn btn-lg btn-secondary" href="{% url 'memory:memory_create' %}" >Add your memory place</a>
         </p>
-        {% if user.is_authenticated %}
-        <h1>AUTHENTICATED!</h1>
-            <!-- {% for ass in backends.associated %}
-            {% if ass.provider == 'facebook' %}
-                <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
-            {% endif %}
-            {% endfor %} -->
-        {% endif %}
-    </div>
+    </div> -->
+
+    {% if user.is_authenticated and user.memories_set.all.count != 0 %}
+        <h2 style="float:left;">Your list of memories</h2>
+        <p class="lead" style="float:right;">
+            <a class="btn btn-secondary" href="{% url 'memory:memory_create' %}" >Add your memory place</a>
+        </p>
+        <div class="list-item">
+                {% for memory in user.memory_set.all %}
+                    <a class="item" href="{% url 'memory:memory_detail' memory.id %}">
+                        <b>Name</b>: {{ memory.name }}
+                        <br>
+                        <b>Date created</b>: {{ memory.timestamp }}
+                    </a>
+                {% endfor %}
+        </div>
+    {% else %}
+        <div class="container" style="text-align: center;">
+            <p class="lead motto">
+                Your list of memories is empty.
+            </p>
+            <p class="lead">
+                <a class="btn btn-lg btn-secondary" href="{% url 'memory:memory_create' %}" >Add your memory place</a>
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
