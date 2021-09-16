@@ -32,8 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.home',
-    'apps.user',
+    # 'apps.user',
     'apps.memory',
+
+    'apps.user.apps.UserConfig',
 
     'social_django',
     # 'crispy_forms',
@@ -55,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'map_diary.urls'
@@ -70,6 +74,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -143,7 +150,27 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Login
-LOGIN_URL = '/login'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Social authentication
+# https://studygyaan.com/django/how-to-add-social-login-to-django
+SOCIAL_AUTH_FACEBOOK_KEY = '982238555686922'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd2ab27df31e60c53b08eda06900eaff7'  # App Secret
+
+# Social auth pipeline
+# https://python-social-auth.readthedocs.io/en/latest/pipeline.html
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'apps.user.pipeline.get_img_url',
+)

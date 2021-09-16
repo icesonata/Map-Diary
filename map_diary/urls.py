@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('apps.home.urls')),
     path('user/', include('apps.user.urls')),
     path('memory/', include('apps.memory.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]

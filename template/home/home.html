@@ -19,6 +19,11 @@
         </p>
         {% if user.is_authenticated %}
         <h1>AUTHENTICATED!</h1>
+            <!-- {% for ass in backends.associated %}
+            {% if ass.provider == 'facebook' %}
+                <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+            {% endif %}
+            {% endfor %} -->
         {% endif %}
     </div>
 {% endblock %}
