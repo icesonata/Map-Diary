@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     firstname = models.CharField(max_length=30, blank=True, null=True)
     lastname = models.CharField(max_length=30, blank=True, null=True)
     profile_url = models.URLField(max_length=500,
@@ -16,8 +16,12 @@ class UserProfile(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         UserProfile.objects.create(user=instance)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(
+            user=instance,
+            firstname=instance.first_name,
+            lastname=instance.last_name,
+        )
 
-# post_save.connect(create_user_profile, sender=User)
+post_save.connect(create_user_profile, sender=User)
