@@ -32,14 +32,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.home',
-    # 'apps.user',
+    'apps.user',
     'apps.memory',
 
-    'apps.user.apps.UserConfig',
-
     'social_django',
-    # 'crispy_forms',
-    # 'floppyforms',
+    'floppyforms',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,9 +86,17 @@ WSGI_APPLICATION = 'map_diary.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'mapdiary',
+        'USER': 'longnguyen',
+        'PASSWORD': 'longnguyen',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -159,6 +164,12 @@ LOGOUT_REDIRECT_URL = 'home'
 # https://studygyaan.com/django/how-to-add-social-login-to-django
 SOCIAL_AUTH_FACEBOOK_KEY = '982238555686922'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd2ab27df31e60c53b08eda06900eaff7'  # App Secret
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'en',
+  'fields': 'id, name, email'
+}
 
 # Social auth pipeline
 # https://python-social-auth.readthedocs.io/en/latest/pipeline.html
