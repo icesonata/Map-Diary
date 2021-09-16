@@ -10,6 +10,9 @@ python-social-auth = {extras = ["django"], version = "*"}
 folium = "*"
 psycopg2 = "*"
 django-floppyforms = "*"
+gunicorn = "*"
+django-heroku = "*"
+whitenoise = "*"
 
 [dev-packages]
 

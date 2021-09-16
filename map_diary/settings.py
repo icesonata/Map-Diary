@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-)&@#&ob3)v5_$64l!_kqjvjo-ehp8hv6%gh-9i8r#7##p_5g4c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['map-diary.herokuapp.com']
 
 
 # Application definition
@@ -92,10 +93,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'mapdiary',
-        'USER': 'longnguyen',
-        'PASSWORD': 'longnguyen',
-        'HOST': 'localhost',
+        'NAME': 'd1cji7qf4s9q4h',
+        'USER': 'bvvpimfamyijkp',
+        'PASSWORD': '93b56f3239eb4b8a8756e1d72c3a21bdc2a20e30ab3822bf924cf821a6a34766',
+        'HOST': 'ec2-34-233-114-40.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -185,3 +186,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
     'apps.user.pipeline.get_img_url',
 )
+
+# Automatic supporting Django + Heroku deployment
+django_heroku.settings(locals() )
