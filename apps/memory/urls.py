@@ -1,8 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path 
+from django.contrib.auth.decorators import login_required
+from .views import MemoryCreate, MemoryDetail
 
 app_name = "memory"
 urlpatterns = [
-    path("create", views.create, name="memory_create"),
-    path("detail/<str:id>", views.detail, name="memory_detail"),
+    # require login before using service
+    path('create', login_required(MemoryCreate.as_view()), name='memory_create'),
+    path('detail/<int:pk>', login_required(MemoryDetail.as_view()), name='memory_detail'),
 ]
