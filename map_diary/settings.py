@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'social_django',
     'floppyforms',
     
+    'django.contrib.gis',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,6 +103,9 @@ DATABASES = {
     }
 }
 
+# GEO libraries setting
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
